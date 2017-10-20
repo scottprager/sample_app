@@ -46,6 +46,16 @@ class User < ApplicationRecord
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
+  def activated?
+    if self.activated
+      return true
+    elsif Rails.env.production?
+      activate
+    end
+    return false
+  end
+      
+
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
