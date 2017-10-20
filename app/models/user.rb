@@ -51,6 +51,7 @@ class User < ApplicationRecord
       return true
     elsif Rails.env.production?
       activate
+      return true
     end
     return false
   end
